@@ -18,10 +18,14 @@ function divide(a,b){
 let op =[];
 let opCount=0;
 buttonAll.forEach((button)=>{
+
     button.addEventListener("click",()=>{
-        if(button.classList.contains("number")){
+
+        if(button.classList.contains("number") || button.textContent==="."){
+
         result.textContent+=button.textContent;
-        op.push(+button.textContent);
+        op.push(button.textContent);
+        
         }else if(opCount===0){
             result.textContent+=button.textContent;
             op.push(button.textContent)
@@ -29,8 +33,11 @@ buttonAll.forEach((button)=>{
         }
         console.log(op)
         if(button.textContent==="="){
+
             const joined = op.join("")
+
             if(joined.includes("+")){
+
                 const beforeOperator=+(joined.slice(0,joined.indexOf("+")))
                 const afterOperator=+(joined.slice(joined.indexOf("+")+1))
                 const resultOp = add(beforeOperator,afterOperator);
@@ -38,8 +45,10 @@ buttonAll.forEach((button)=>{
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
+
             }
             else if(joined.includes("-")){
+
                 const beforeOperator=+(joined.slice(0,joined.indexOf("-")))
                 const afterOperator=+(joined.slice(joined.indexOf("-")+1))
                 const resultOp = substract(beforeOperator,afterOperator);
@@ -47,6 +56,7 @@ buttonAll.forEach((button)=>{
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
+                
             }
         }
     })

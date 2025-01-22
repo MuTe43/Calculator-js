@@ -7,7 +7,7 @@ body, html{
 }
 .mainContainer{
     background-color:rgb(48, 21, 21);
-    width:375px;
+    width:371px;
     height:540px;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@ body, html{
 .firstRow button{
     background-color: rgb(196, 211, 211);
     flex:1;
-    margin:2px 5px;
+    margin:2px 4px;
     gap:8px;
     width: 10vh;
     height: 11vh;
@@ -64,5 +64,5 @@ button:active {
   
 .firstRow:nth-child(6)>button:nth-child(1){
     flex:1;
-    width:21.7vh;
+    width:21.5vh;
 }
