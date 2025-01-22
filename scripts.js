@@ -20,36 +20,58 @@ function divide(a,b){
 }
 let op =[];
 let opCount=0;
+let pressed =0;
 buttonAll.forEach((button)=>{
 
     button.addEventListener("click",()=>{
-
+        pressed++
         if(button.classList.contains("number") || button.textContent==="."){
-
-        result.textContent+=button.textContent;
-        op.push(button.textContent);
-        }else if(opCount===0){
-            if(button.textContent==="+/-"){
-                const before = op[0];
-                if(+before >0){
-                    result.textContent= "-"+ op.slice(0);
-                }
-                opCount=0;
+            if(button.textContent==="C"){
+                result.textContent="";
+                op=[]
             }
             else{
+        result.textContent+=button.textContent;
+        // op.push(button.textContent);
+            }
+        }else if(opCount===0){
+
+            if(button.textContent==="+/-"){
+
+                const before = op[0];
+                if(+before >0){
+
+                    result.textContent= "-"+ result.textContent;
+
+                }else{result.textContent= Math.abs(+result.textContent)}
+                opCount=0;
+
+            }
+            else{
+
             result.textContent+=button.textContent;
+            op.push(result.textContent);
             op.push(button.value);
-            opCount++;}
+            opCount++;
         }
+
+        }
+
+        op.push(result.textContent);
+        if(op.length >1){
+        op = op.slice(op.length-1)
+        }
+
+
         console.log(op)
         if(button.textContent==="="){
 
             const joined = op.join("")
 
-            if(joined.includes("plus")){
+            if(joined.includes("+")){
 
-                const beforeOperator=+(joined.slice(0,joined.indexOf("plus")))
-                const afterOperator=+(joined.slice(joined.indexOf("plus")+"plus".length))
+                const beforeOperator=+(joined.slice(0,joined.indexOf("+")))
+                const afterOperator=+(joined.slice(joined.indexOf("+")+"+".length))
                 const resultOp = add(beforeOperator,afterOperator);
                 result.textContent=resultOp;
                 op=[resultOp];
@@ -57,11 +79,11 @@ buttonAll.forEach((button)=>{
                 console.log(result)
 
             }
-            else if(joined.includes("minus")){
+            else if(joined.includes("-")){
                 
-                const beforeOperator=(joined.slice(0,joined.indexOf("minus")))
+                const beforeOperator=(joined.slice(0,joined.lastIndexOf("-")))
                 console.log(beforeOperator)
-                const afterOperator=(joined.slice(joined.indexOf("minus")+"minus".length))
+                const afterOperator=(joined.slice(joined.lastIndexOf("-")+1))
                 console.log(afterOperator)
                 const resultOp = substract(beforeOperator,afterOperator);
                 result.textContent=resultOp;
