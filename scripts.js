@@ -18,26 +18,31 @@ function multiply(a,b){
 function divide(a,b){
     return a/b;
 }
-let op =[];
-let opCount=0;
-let pressed =0;
+
+let op =[]; // operations array
+let opCount=0; // keeping track of operations so we cant press more than 1 operator at a time
+let pressed =0; //useless as of now
 buttonAll.forEach((button)=>{
 
     button.addEventListener("click",()=>{
         pressed++
+        console.log(pressed)
         if(button.classList.contains("number") || button.textContent==="."){
-            if(button.textContent==="C"){
-                result.textContent="";
-                op=[]
+            if(result.textContent==="CANNOT DIVIDE BY 0" || result.textContent==="ERROR" ){
+                result.textContent=""
             }
-            else{
         result.textContent+=button.textContent;
-        // op.push(button.textContent);
-            }
+        
+            
         }else if(opCount===0){
-
-            if(button.textContent==="+/-"){
-
+            // Error if we press the = operator before finishing the equation
+            if(button.textContent==="=" && opCount===0){
+                result.textContent="ERROR"
+                op=[];
+                opCount=0;
+            }
+            else if(button.textContent==="+/-"){
+                // flips signs takes the first index because the array only has 1 element
                 const before = op[0];
                 if(+before >0){
 
@@ -48,7 +53,9 @@ buttonAll.forEach((button)=>{
 
             }
             else{
-
+                // if any operation has been pressed other than "+/-" we append it to the result
+                //  we increment the count to 1 so we can't add more operators to the equation
+            pressed=0
             result.textContent+=button.textContent;
             op.push(result.textContent);
             op.push(button.value);
@@ -56,75 +63,94 @@ buttonAll.forEach((button)=>{
         }
 
         }
-
+        // we add the result to the array but there is a twist in the next comment...
         op.push(result.textContent);
         if(op.length >1){
+        //I'm trying to limit the array to only 1 element so that swapping signs is made easier
+        //therefore everytime I delete the previous elements I keep the fresh one (it piles up the numbers pressed)
         op = op.slice(op.length-1)
+
+        }  
+        //simple Clearing of the array
+        if(button.textContent==="AC" || button.textContent==="C"){
+            result.textContent="";
+            op=[];
+            opCount=0
         }
 
 
         console.log(op)
+
+        //the operatiosn begin
         if(button.textContent==="="){
 
             const joined = op.join("")
 
+            //the functions are the same
+            //we get the elements behind AND after the operator using slice
+            // every result is rounded to 2 decimals
             if(joined.includes("+")){
 
                 const beforeOperator=+(joined.slice(0,joined.indexOf("+")))
-                const afterOperator=+(joined.slice(joined.indexOf("+")+"+".length))
+                const afterOperator=+(joined.slice(joined.indexOf("+")+1))
                 const resultOp = add(beforeOperator,afterOperator);
-                result.textContent=resultOp;
+                result.textContent=resultOp.toFixed(2);
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
 
             }
             else if(joined.includes("-")){
-                
+                //a tricky one here, I have to get the minus element from last index
+                //because if the first number is negative it ends up taking its sign instead of the operator
                 const beforeOperator=(joined.slice(0,joined.lastIndexOf("-")))
                 console.log(beforeOperator)
                 const afterOperator=(joined.slice(joined.lastIndexOf("-")+1))
                 console.log(afterOperator)
                 const resultOp = substract(beforeOperator,afterOperator);
-                result.textContent=resultOp;
+                result.textContent=resultOp.toFixed(2);
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
 
             }
 
-            else if(joined.includes("multiply")){
+            else if(joined.includes("x")){
                 
-                const beforeOperator=(joined.slice(0,joined.indexOf("multiply")))
+                const beforeOperator=(joined.slice(0,joined.indexOf("x")))
                 console.log(beforeOperator)
-                const afterOperator=(joined.slice(joined.indexOf("multiply")+"multiply".length))
+                const afterOperator=(joined.slice(joined.indexOf("x")+1))
                 console.log(afterOperator)
                 const resultOp = multiply(beforeOperator,afterOperator);
-                result.textContent=resultOp;
+                result.textContent=resultOp.toFixed(2);
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
 
             }
 
-            else if(joined.includes("divide")){
+            else if(joined.includes("/")){
                 
-                const beforeOperator=(joined.slice(0,joined.indexOf("divide")))
+                const beforeOperator=(joined.slice(0,joined.indexOf("/")))
                 console.log(beforeOperator)
-                const afterOperator=(joined.slice(joined.indexOf("divide")+"divide".length))
+                const afterOperator=(joined.slice(joined.indexOf("/")+1))
                 console.log(afterOperator)
+
+                // division by zero impossible
+                if(afterOperator=="0"){
+                    result.textContent="CANNOT DIVIDE BY 0";
+                    op=[];
+                    opCount=0;
+                }
+                else{
                 const resultOp = divide(beforeOperator,afterOperator);
-                result.textContent=resultOp;
+                result.textContent=resultOp.toFixed(2);
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
-
+            }
             }
         }
-        if(button.textContent==="AC"){
-            result.textContent=""
-            op=[]
-            opCount=0
-        }
+        
     })
 })
