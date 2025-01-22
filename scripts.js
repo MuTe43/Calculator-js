@@ -28,18 +28,17 @@ buttonAll.forEach((button)=>{
 
         result.textContent+=button.textContent;
         op.push(button.textContent);
-        
         }else if(opCount===0){
             if(button.textContent==="+/-"){
-                const before = button.textContent
-                if(button.textContent >0){
-                    button.textContent = "-" + before;
-                    result.textContent+=button.textContent;
+                const before = op[0];
+                if(+before >0){
+                    result.textContent= "-"+ op.slice(0);
                 }
+                opCount=0;
             }
             else{
             result.textContent+=button.textContent;
-            op.push(button.value)
+            op.push(button.value);
             opCount++;}
         }
         console.log(op)
