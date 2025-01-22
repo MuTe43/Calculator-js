@@ -49,6 +49,7 @@ function divide(a,b){
 let op =[]; // operations array
 let opCount=0; // keeping track of operations so we cant press more than 1 operator at a time
 let pressed =0; //useless as of now
+let point = 0 //keep track of the decimal point so we cant add more points
 buttonAll.forEach((button)=>{
 
     button.addEventListener("click",()=>{
@@ -58,7 +59,16 @@ buttonAll.forEach((button)=>{
             if(result.textContent==="CANNOT DIVIDE BY 0" || result.textContent==="ERROR" ){
                 result.textContent=""
             }
-        result.textContent+=button.textContent;
+            if(button.textContent==="." && point===0){
+                point++
+                result.textContent+=button.textContent;
+            }
+            else if(button.textContent==="." && point!==0){
+                result.textContent=result.textContent
+
+            }
+            else{
+        result.textContent+=button.textContent;}
         
             
         }else if(opCount===0){
@@ -67,6 +77,7 @@ buttonAll.forEach((button)=>{
                 result.textContent="ERROR"
                 op=[];
                 opCount=0;
+                point=0
             }
             else if(button.textContent==="+/-"){
                 // flips signs takes the first index because the array only has 1 element
@@ -87,6 +98,7 @@ buttonAll.forEach((button)=>{
             op.push(result.textContent);
             op.push(button.value);
             opCount++;
+            point=0
         }
 
         }
@@ -103,6 +115,7 @@ buttonAll.forEach((button)=>{
             result.textContent="";
             op=[];
             opCount=0
+            point=0
         }
 
 
