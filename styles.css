@@ -6,8 +6,8 @@ body{
 }
 .mainContainer{
     background-color:rgb(48, 21, 21);
-    width:450px;
-    height:543px;
+    width:375px;
+    height:535px;
     display: flex;
     flex-direction: column;
     border: 5px solid rgb(189, 171, 171);
@@ -19,7 +19,7 @@ body{
     margin:auto;
     margin-bottom:5px ;
     margin-top: 5px;
-    width: 55vh;
+    width: 40vh;
     height: 8vh;
     border: 3px solid black;
     border-radius: 8px;
@@ -27,7 +27,7 @@ body{
 .firstRow button{
     background-color: rgb(196, 211, 211);
     flex:1;
-    margin:5px 14px;
+    margin:2px 5px;
     gap:10px;
     width: 10vh;
     height: 11vh;
@@ -40,7 +40,7 @@ body{
 div>.clear, div>.operation{
     background-color: bisque;
     width: 10vh;
-    height: 8vh;
+    height: 10vh;
 }
 div>.clear{
     background-color: rgb(187, 37, 37);
@@ -54,3 +54,8 @@ button:hover{
 button:active {
     background-color: #a8a1a1;
   }
+  
+.firstRow:nth-child(6)>button:nth-child(1){
+    flex:1;
+    width:22vh;
+}
