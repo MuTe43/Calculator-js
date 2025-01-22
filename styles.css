@@ -1,34 +1,41 @@
-body{
+body, html{
     display:flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-content: center;
+    height:100%;
 }
 .mainContainer{
     background-color:rgb(48, 21, 21);
     width:375px;
-    height:535px;
+    height:540px;
     display: flex;
     flex-direction: column;
     border: 5px solid rgb(189, 171, 171);
     border-radius: 10px;
     box-shadow: 0 7px rgb(117, 88, 88);
+    align-self: center;
 }
 .result{
     background-color: azure;
     margin:auto;
-    margin-bottom:5px ;
-    margin-top: 5px;
+    padding: 5px;
     width: 40vh;
     height: 8vh;
     border: 3px solid black;
     border-radius: 8px;
+    display: flex;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    justify-content: end;
 }
 .firstRow button{
     background-color: rgb(196, 211, 211);
     flex:1;
     margin:2px 5px;
-    gap:10px;
+    gap:8px;
     width: 10vh;
     height: 11vh;
     text-align: center;
@@ -40,7 +47,7 @@ body{
 div>.clear, div>.operation{
     background-color: bisque;
     width: 10vh;
-    height: 10vh;
+    height: 11vh;
 }
 div>.clear{
     background-color: rgb(187, 37, 37);
@@ -57,5 +64,5 @@ button:active {
   
 .firstRow:nth-child(6)>button:nth-child(1){
     flex:1;
-    width:22vh;
+    width:21.7vh;
 }
