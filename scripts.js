@@ -3,20 +3,45 @@ const operator = document.querySelectorAll(".operation")
 const buttonAll = document.querySelectorAll("button")
 const result = document.querySelector(".result")
 function add(a,b){
-    return a+b;
+    if (+a%1!=0){
+        a=+a.toFixed(2)
+    }
+    if (+b%1!=0){
+        b=+b.toFixed(2)
+    }
+    return +(a+b);
 }
 
 function substract(a,b){
+    if (+a%1!=0){
+        a=+a.toFixed(2)
+    }
+    if (+b%1!=0){
+        b=+b.toFixed(2)
+    }
     if(a<0&&b<0){
         return +("-"+Math.abs(a)+Math.abs(b))
     }
-    return (a-b);
+    
+    return +(a-b);
 }
 function multiply(a,b){
-    return a*b;
+    if (+a%1!=0){
+        a=+a.toFixed(2)
+    }
+    if (+b%1!=0){
+        b=+b.toFixed(2)
+    }
+    return +(a*b);
 }
 function divide(a,b){
-    return a/b;
+    if (+a%1!=0){
+        a=+a.toFixed(2)
+    }
+    if (+b%1!=0){
+        b=+b.toFixed(2)
+    }
+    return +(a/b);
 }
 
 let op =[]; // operations array
@@ -94,7 +119,7 @@ buttonAll.forEach((button)=>{
                 const beforeOperator=+(joined.slice(0,joined.indexOf("+")))
                 const afterOperator=+(joined.slice(joined.indexOf("+")+1))
                 const resultOp = add(beforeOperator,afterOperator);
-                result.textContent=resultOp.toFixed(2);
+                result.textContent=resultOp;
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
@@ -103,12 +128,12 @@ buttonAll.forEach((button)=>{
             else if(joined.includes("-")){
                 //a tricky one here, I have to get the minus element from last index
                 //because if the first number is negative it ends up taking its sign instead of the operator
-                const beforeOperator=(joined.slice(0,joined.lastIndexOf("-")))
+                const beforeOperator=+(joined.slice(0,joined.lastIndexOf("-")))
                 console.log(beforeOperator)
-                const afterOperator=(joined.slice(joined.lastIndexOf("-")+1))
+                const afterOperator=+(joined.slice(joined.lastIndexOf("-")+1))
                 console.log(afterOperator)
                 const resultOp = substract(beforeOperator,afterOperator);
-                result.textContent=resultOp.toFixed(2);
+                result.textContent=resultOp;
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
@@ -117,12 +142,12 @@ buttonAll.forEach((button)=>{
 
             else if(joined.includes("x")){
                 
-                const beforeOperator=(joined.slice(0,joined.indexOf("x")))
+                const beforeOperator=+(joined.slice(0,joined.indexOf("x")))
                 console.log(beforeOperator)
-                const afterOperator=(joined.slice(joined.indexOf("x")+1))
+                const afterOperator=+(joined.slice(joined.indexOf("x")+1))
                 console.log(afterOperator)
                 const resultOp = multiply(beforeOperator,afterOperator);
-                result.textContent=resultOp.toFixed(2);
+                result.textContent=resultOp;
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
@@ -131,20 +156,20 @@ buttonAll.forEach((button)=>{
 
             else if(joined.includes("/")){
                 
-                const beforeOperator=(joined.slice(0,joined.indexOf("/")))
+                const beforeOperator=+(joined.slice(0,joined.indexOf("/")))
                 console.log(beforeOperator)
-                const afterOperator=(joined.slice(joined.indexOf("/")+1))
+                const afterOperator=+(joined.slice(joined.indexOf("/")+1))
                 console.log(afterOperator)
 
                 // division by zero impossible
-                if(afterOperator=="0"){
+                if(afterOperator===0){
                     result.textContent="CANNOT DIVIDE BY 0";
                     op=[];
                     opCount=0;
                 }
                 else{
                 const resultOp = divide(beforeOperator,afterOperator);
-                result.textContent=resultOp.toFixed(2);
+                result.textContent=resultOp;
                 op=[resultOp];
                 opCount=0;
                 console.log(result)

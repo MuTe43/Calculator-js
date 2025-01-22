@@ -1,14 +1,18 @@
+*{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
 body, html{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     height:100%;
+    background-color: rgb(53, 42, 63);
 }
 .mainContainer{
-    background-color:rgb(48, 21, 21);
-    width:371px;
-    height:540px;
+    background-color:rgb(35, 44, 49);
+    width:375px;
+    height:545px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,6 +37,7 @@ body, html{
     align-items: center;
     justify-content: end;
 }
+
 .firstRow button{
     background-color: rgb(196, 211, 211);
     flex:1;
@@ -68,4 +73,5 @@ button:active {
 .firstRow:nth-child(6)>button:nth-child(1){
     flex:1;
     width:21.5vh;
+    margin-bottom: 5px;
 }
