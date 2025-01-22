@@ -2,6 +2,8 @@ const number = document.querySelectorAll(".number")
 const operator = document.querySelectorAll(".operation")
 const buttonAll = document.querySelectorAll("button")
 const result = document.querySelector(".result")
+
+//the if statements check if the inputs are decimals, if so they limit them t a maxium of 3 number after the point
 function add(a,b){
     if (+a%1!=0){
         a=+a.toFixed(2)
@@ -114,6 +116,8 @@ buttonAll.forEach((button)=>{
             //the functions are the same
             //we get the elements behind AND after the operator using slice
             // every result is rounded to 2 decimals
+            //we reset the array to contain only the result (so we can keep operating on it)
+            //we reset the opCount to allow us operating on the result
             if(joined.includes("+")){
 
                 const beforeOperator=+(joined.slice(0,joined.indexOf("+")))
