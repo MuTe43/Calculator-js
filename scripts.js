@@ -7,6 +7,9 @@ function add(a,b){
 }
 
 function substract(a,b){
+    if(a<0&&b<0){
+        return +("-"+Math.abs(a)+Math.abs(b))
+    }
     return (a-b);
 }
 function multiply(a,b){
@@ -27,19 +30,27 @@ buttonAll.forEach((button)=>{
         op.push(button.textContent);
         
         }else if(opCount===0){
+            if(button.textContent==="+/-"){
+                const before = button.textContent
+                if(button.textContent >0){
+                    button.textContent = "-" + before;
+                    result.textContent+=button.textContent;
+                }
+            }
+            else{
             result.textContent+=button.textContent;
-            op.push(button.textContent)
-            opCount++;
+            op.push(button.value)
+            opCount++;}
         }
         console.log(op)
         if(button.textContent==="="){
 
             const joined = op.join("")
 
-            if(joined.includes("+")){
+            if(joined.includes("plus")){
 
-                const beforeOperator=+(joined.slice(0,joined.indexOf("+")))
-                const afterOperator=+(joined.slice(joined.indexOf("+")+1))
+                const beforeOperator=+(joined.slice(0,joined.indexOf("plus")))
+                const afterOperator=+(joined.slice(joined.indexOf("plus")+"plus".length))
                 const resultOp = add(beforeOperator,afterOperator);
                 result.textContent=resultOp;
                 op=[resultOp];
@@ -47,17 +58,52 @@ buttonAll.forEach((button)=>{
                 console.log(result)
 
             }
-            else if(joined.includes("-")){
-
-                const beforeOperator=+(joined.slice(0,joined.indexOf("-")))
-                const afterOperator=+(joined.slice(joined.indexOf("-")+1))
+            else if(joined.includes("minus")){
+                
+                const beforeOperator=(joined.slice(0,joined.indexOf("minus")))
+                console.log(beforeOperator)
+                const afterOperator=(joined.slice(joined.indexOf("minus")+"minus".length))
+                console.log(afterOperator)
                 const resultOp = substract(beforeOperator,afterOperator);
                 result.textContent=resultOp;
                 op=[resultOp];
                 opCount=0;
                 console.log(result)
-                
+
             }
+
+            else if(joined.includes("multiply")){
+                
+                const beforeOperator=(joined.slice(0,joined.indexOf("multiply")))
+                console.log(beforeOperator)
+                const afterOperator=(joined.slice(joined.indexOf("multiply")+"multiply".length))
+                console.log(afterOperator)
+                const resultOp = multiply(beforeOperator,afterOperator);
+                result.textContent=resultOp;
+                op=[resultOp];
+                opCount=0;
+                console.log(result)
+
+            }
+
+            else if(joined.includes("divide")){
+                
+                const beforeOperator=(joined.slice(0,joined.indexOf("divide")))
+                console.log(beforeOperator)
+                const afterOperator=(joined.slice(joined.indexOf("divide")+"divide".length))
+                console.log(afterOperator)
+                const resultOp = divide(beforeOperator,afterOperator);
+                result.textContent=resultOp;
+                op=[resultOp];
+                opCount=0;
+                console.log(result)
+
+            }
+        }
+        if(button.textContent==="AC"){
+            result.textContent=""
+            op=[]
+            opCount=0
         }
     })
 })
